@@ -16,8 +16,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,14 +29,12 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.latihan.mynotes.R
 import com.latihan.mynotes.data.entity.Note
 import com.latihan.mynotes.routes.Pages
-import com.latihan.mynotes.ui.theme.MyNotesTheme
 
 @Composable
 fun NotesCard(
@@ -42,7 +42,7 @@ fun NotesCard(
     note: Note,
     navHostController: NavHostController
 ) {
-    val isBookmark = remember { mutableStateOf(false) }
+    var isBookmark by remember { mutableStateOf(false) }
     Card(
         colors = CardColors(
             containerColor = MaterialTheme.colorScheme.primary,
@@ -84,11 +84,11 @@ fun NotesCard(
                     modifier = Modifier.weight(3f)
                 )
                 IconButton(
-                    onClick = {isBookmark.value = !isBookmark.value},
+                    onClick = {isBookmark = !isBookmark},
                     modifier = Modifier.weight(1f)
                 ) {
                     Icon(
-                        painter = if (isBookmark.value) {
+                        painter = if (isBookmark) {
                             painterResource(id = R.drawable.bookmark_true)
                         } else {
                             painterResource(id = R.drawable.bookmark_false)
