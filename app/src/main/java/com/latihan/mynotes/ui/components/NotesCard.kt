@@ -9,8 +9,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -31,10 +34,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.latihan.mynotes.R
 import com.latihan.mynotes.data.entity.Note
 import com.latihan.mynotes.routes.Pages
+import com.latihan.mynotes.viewmodel.HomeViewModel
 
 @Composable
 fun NotesCard(
@@ -42,7 +47,9 @@ fun NotesCard(
     note: Note,
     navHostController: NavHostController
 ) {
+    val homeViewModel: HomeViewModel = hiltViewModel()
     var isBookmark by remember { mutableStateOf(false) }
+    var showDialog by remember { mutableStateOf(false) }
     Card(
         colors = CardColors(
             containerColor = MaterialTheme.colorScheme.primary,
@@ -111,7 +118,7 @@ fun NotesCard(
             )
             IconButton(
                 onClick = {
-                    
+                    showDialog = true
                 },
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
@@ -121,6 +128,30 @@ fun NotesCard(
                    tint = Color(0xFFef233c)
                )
             }
+        }
+        if (showDialog) {
+            AlertDialog(
+                onDismissRequest = { showDialog = false },
+                title = {
+                    Text(text = "Are you sure?")
+                },
+                text = {
+                    Text(text = "This note will be permanently deleted")
+                },
+                confirmButton = {
+                    Button(onClick = {
+                        homeViewModel.deleteNote(note)
+                        showDialog = false
+                    }) {
+                        Text(text = "Confirm")
+                    }
+                },
+                dismissButton = {
+                    Button(onClick = { showDialog = false }) {
+                        Text(text = "Cancel")
+                    }
+                }
+            )
         }
     }
 }
