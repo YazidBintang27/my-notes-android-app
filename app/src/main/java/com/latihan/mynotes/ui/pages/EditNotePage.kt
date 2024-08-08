@@ -37,7 +37,7 @@ import com.latihan.mynotes.viewmodel.EditNoteViewModel
 fun EditNotePage(
     modifier: Modifier = Modifier,
     navHostController: NavHostController,
-    index: Int?
+    index: Int
 ) {
     EditNotePageContent(
         modifier = modifier,
@@ -51,13 +51,13 @@ fun EditNotePage(
 fun EditNotePageContent(
     modifier: Modifier,
     navHostController: NavHostController,
-    index: Int?
+    index: Int
 ) {
     val editNoteViewModel: EditNoteViewModel = hiltViewModel()
     val dataNotes by editNoteViewModel.dataNotes.collectAsState()
-
+    
     LaunchedEffect(index) {
-        editNoteViewModel.getNoteById(index)
+        editNoteViewModel.getNote(index = index)
         Log.d("getnote", "Launch getnotebyid")
     }
 

@@ -9,6 +9,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -21,13 +23,14 @@ class EditNoteViewModel @Inject constructor(
     private val _dataNotes = MutableStateFlow(Note())
 
     val dataNotes: StateFlow<Note>
-        get() = _dataNotes
+        get() = _dataNotes.asStateFlow()
 
-    fun getNoteById(id: Int?) {
+    fun getNote(index: Int) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                val data = noteRepository.getNoteById(id ?: 0)
-                _dataNotes.value = data
+                noteRepository.getAllNote().collectLatest { note ->
+                    _dataNotes.tryEmit(note[index])
+                }
             }
         }
     }

@@ -63,7 +63,7 @@ fun NotesCard(
             .padding(12.dp)
             .clip(shape = RoundedCornerShape(14.dp)),
         onClick = {
-            navHostController.navigate("${Pages.EditNote.route}/${index + 1}") {
+            navHostController.navigate("${Pages.EditNote.route}/${index}") {
                 popUpTo(Pages.EditNote.route) {
                     inclusive = true
                 }
