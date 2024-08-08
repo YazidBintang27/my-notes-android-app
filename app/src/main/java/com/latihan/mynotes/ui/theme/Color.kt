@@ -12,5 +12,6 @@ val Pink40 = Color(0xFF7D5260)
 
 // Custom Color
 val Green = Color(0xFF16DB65)
-val Grey = Color(0xFF2A2A2A)
-val Red = Color(0xFFef233c)
+val Grey = Color(0xFF444444)
+val Red = Color(0xFFFD4057)
+val Blue = Color(0xFF00bbf9)

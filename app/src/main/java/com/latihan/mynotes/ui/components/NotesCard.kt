@@ -45,7 +45,8 @@ import com.latihan.mynotes.viewmodel.HomeViewModel
 fun NotesCard(
     modifier: Modifier = Modifier,
     note: Note,
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    index: Int
 ) {
     val homeViewModel: HomeViewModel = hiltViewModel()
     var isBookmark by remember { mutableStateOf(false) }
@@ -62,7 +63,7 @@ fun NotesCard(
             .padding(12.dp)
             .clip(shape = RoundedCornerShape(14.dp)),
         onClick = {
-            navHostController.navigate(Pages.EditNote.route) {
+            navHostController.navigate("${Pages.EditNote.route}/${index + 1}") {
                 popUpTo(Pages.EditNote.route) {
                     inclusive = true
                 }

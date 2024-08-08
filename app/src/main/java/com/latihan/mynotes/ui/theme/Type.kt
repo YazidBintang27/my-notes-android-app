@@ -11,16 +11,16 @@ import com.latihan.mynotes.R
 // Set of Material typography styles to start with
 val Typography = Typography(
     bodyLarge = TextStyle(
-        fontFamily = FontFamily(Font(R.font.opensans_medium)),
-        fontWeight = FontWeight.Normal,
-        fontSize = 12.sp,
+        fontFamily = FontFamily(Font(R.font.opensans_semibold)),
+        fontWeight = FontWeight.Bold,
+        fontSize = 14.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
     ),
     titleLarge = TextStyle(
         fontFamily = FontFamily(Font(R.font.opensans_bold)),
         fontWeight = FontWeight.Bold,
-        fontSize = 16.sp,
+        fontSize = 20.sp,
         lineHeight = 28.sp,
         letterSpacing = 0.sp
     ),
