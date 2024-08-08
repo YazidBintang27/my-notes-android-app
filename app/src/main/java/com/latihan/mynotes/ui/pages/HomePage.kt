@@ -53,7 +53,7 @@ fun HomePage(
                         }
                     }
                 },
-                containerColor = Color(0xFFfee440),
+                containerColor = MaterialTheme.colorScheme.tertiary,
                 contentColor = MaterialTheme.colorScheme.onPrimary,
                 shape = RoundedCornerShape(12.dp),
                 modifier = Modifier.padding(12.dp)
@@ -94,7 +94,7 @@ fun HomeContent(
                 .fillMaxWidth()
                 .height(180.dp)
                 .background(
-                    color = Color(0xFF9b5de5),
+                    color = MaterialTheme.colorScheme.secondary,
                     shape = RoundedCornerShape(20.dp)
                 ),
             contentAlignment = Alignment.Center
